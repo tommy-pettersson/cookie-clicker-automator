@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 import keyboard
 import time
 
+MINUTES_BETWEEN_SAVES = 10
 
 driver = webdriver.Chrome()
 
@@ -128,11 +129,16 @@ def click_cookie():
 
 
 def main():
+    program_start = time.time()
     is_clicking = False
 
     initialize()
 
     while True:
+
+        time_elapsed = int(time.time() - program_start)
+        if time_elapsed % (MINUTES_BETWEEN_SAVES * 60) == 0:
+            save_game()
 
         if keyboard.is_pressed(1):
             time.sleep(0.5)
